@@ -28,36 +28,33 @@ nouns = [
     "Play", "Sport", "Recreation", "Leisure", "Amusement", "Entertainment", "Pleasure", "Joy",
     "Delight", "Enjoyment", "Satisfaction", "Gratification", "Fulfillment", "Bliss", "Euphoria"
 ]
-base_words = adjectives + nouns
 
 # Function to generate a list of potential casino names
 def generate_casino_names(count=10):
     names = []
     for _ in range(count):
-        # Combine words from both lists for a richer set of potential names
-        word1 = random.choice(base_words)
-        word2 = random.choice(base_words)
+        word1 = random.choice(adjectives)
+        word2 = random.choice(nouns)
         name = f"{word1}{word2}.com"
-        if len(name) <= 20:  # Adjust length constraint as needed
-            names.append(name)
+        names.append(name)
     return names
 
 # Simulated function to check domain availability
 def check_domain_availability(domain):
-    # Placeholder for domain availability check logic
     return random.choice([True, False])
 
 # Main function to generate names and check their domain availability
 def main():
-    generated_names = generate_casino_names()
-    available_domains = [name for name in generated_names if check_domain_availability(name)]
-
-    # Save the available domain names to a text file
-    with open("available_casino_domains.txt", "w") as file:
-        for domain in available_domains:
-            file.write(f"{domain}\n")
-    
-    print(f"Available domains saved to available_casino_domains.txt: {available_domains}")
+    while True:  # This will make the script run indefinitely
+        generated_names = generate_casino_names(100)  # Generate 100 names each loop
+        available_domains = [name for name in generated_names if check_domain_availability(name)]
+        
+        # Save the available domain names to a text file
+        with open("available_casino_domains.txt", "a") as file:
+            for domain in available_domains:
+                file.write(f"{domain}\n")
+        
+        print(f"Available domains saved to available_casino_domains.txt: {available_domains}")
 
 # Run the main function
 if __name__ == "__main__":
